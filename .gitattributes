@@ -1,0 +1,18 @@
+# Normalize line endings for all text files
+* text=auto eol=lf
+
+# Force Windows batch/PowerShell files to CRLF
+*.ps1  text eol=crlf
+*.bat  text eol=crlf
+
+# Binary files — never diff or merge
+*.bin      binary
+*.pickle   binary
+*.npy      binary
+*.sqlite3  binary
+*.h5       binary
+*.keras    binary
+*.pyc      binary
+
+# Lock files — keep as-is, don't rebase
+package-lock.json  merge=ours

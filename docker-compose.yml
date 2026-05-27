@@ -1,0 +1,26 @@
+version: "3.9"
+
+# Local development: runs the full production stack in Docker.
+# For active frontend development, run Vite separately instead:
+#   cd frontend && npm run dev
+#
+# Usage:
+#   docker compose up --build
+#   docker compose down
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env          # copy .env.example → .env and add your API keys
+    environment:
+      PORT: "8000"
+      CORS_ORIGINS: "http://localhost:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s     # allow time for model to load

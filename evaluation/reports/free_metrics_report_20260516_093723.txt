@@ -1,0 +1,22 @@
+=================================================================
+MATERNAL HEALTH ASSISTANT — FREE METRICS REPORT
+Timestamp : 20260516_093723
+LLM tokens consumed: ZERO
+=================================================================
+
+RETRIEVAL METRICS
+-----------------------------------------------------------------
+  Recall@5        : 0.9000  (floor 0.75)
+  Precision@5     : 0.6100
+  MRR              : 0.8167  (floor 0.60)
+
+GROUNDING / HALLUCINATION RISK
+-----------------------------------------------------------------
+  Grounding Score  : 0.6224  (floor 0.50)
+  Hallucination Risk: 0.3776  (lower is better)
+
+SAFETY COMPLIANCE
+-----------------------------------------------------------------
+  Compliance Rate  : 1.0000  (floor 1.00)
+  Tests Passed     : 10/10
+=================================================================

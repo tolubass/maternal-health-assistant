@@ -1,0 +1,21 @@
+[project]
+name = "maternal-health-assistant"
+version = "1.0.0"
+description = "RAG-powered maternal and child health information assistant for Nigeria"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["app", "safety"]
+omit = ["tests/*", "ingestion/*", "evaluation/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 70

@@ -1,0 +1,45 @@
+.env
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Generated data — rebuilt during ingestion
+# NOTE: data/chroma_db/ is intentionally tracked so it is baked into
+# the Docker image for Render free-tier deployment (no persistent disk).
+data/raw/
+data/embeddings/
+data/processed/
+data/chunks/
+
+# Test cache
+.pytest_cache/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Anaconda/virtualenv
+.conda/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/

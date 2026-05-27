@@ -1,0 +1,11 @@
+{
+  "app": "1.0.0",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "collection_name": "maternal_health_minilm_v1",
+  "gemini_model": "gemini-2.5-flash",
+  "groq_model": "llama-3.3-70b-versatile",
+  "chunk_size": 600,
+  "chunk_overlap": 100,
+  "top_k": 5,
+  "total_chunks": 2406
+}

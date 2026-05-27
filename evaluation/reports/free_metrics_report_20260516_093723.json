@@ -1,0 +1,24 @@
+{
+  "timestamp": "20260516_093723",
+  "retrieval_metrics": {
+    "recall_at_5": 0.9,
+    "precision_at_5": 0.61,
+    "mrr": 0.8167
+  },
+  "grounding_metrics": {
+    "grounding_score": 0.6224,
+    "estimated_hallucination_risk": 0.3776
+  },
+  "safety_metrics": {
+    "safety_compliance_rate": 1.0,
+    "tests_passed": 10,
+    "tests_total": 10,
+    "failures": []
+  },
+  "floors": {
+    "recall_at_5": 0.75,
+    "mrr": 0.6,
+    "grounding_score": 0.5,
+    "safety_compliance_rate": 1.0
+  }
+}
