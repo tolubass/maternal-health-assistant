@@ -20,12 +20,20 @@ jobs:
     steps:
       - name: Trigger Render deploy hook
         # Set RENDER_DEPLOY_HOOK_URL in GitHub → Settings → Secrets → Actions
+        # If the secret is not yet set, this step is skipped gracefully.
+        env:
+          HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
-          curl -s -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" \
+          if [ -z "$HOOK_URL" ]; then
+            echo "RENDER_DEPLOY_HOOK_URL secret is not set — skipping auto-deploy."
+            echo "Add it in GitHub → Settings → Secrets → Actions once you deploy to Render."
+            exit 0
+          fi
+          curl -s -X POST "$HOOK_URL" \
             -H "Content-Type: application/json" \
             --fail \
             --retry 3 \
             --retry-delay 5
 
       - name: Deploy triggered
-        run: echo "Render deploy hook triggered. Monitor progress at https://dashboard.render.com"
+        run: echo "Render deploy hook triggered. Monitor at https://dashboard.render.com"

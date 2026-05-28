@@ -8,7 +8,8 @@ on:
 
 jobs:
   # -------------------------------------------------------
-  # Backend: lint + test
+  # Backend: unit tests (safety layer + chunking)
+  # These modules use only stdlib — no heavy ML deps needed.
   # -------------------------------------------------------
   backend:
     name: Backend (Python 3.11)
@@ -23,18 +24,24 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      - name: Install CPU-only PyTorch
-        run: pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
-
-      - name: Install Python dependencies
-        run: pip install --no-cache-dir -r requirements-dev.txt
+      # Safety and chunking modules use only stdlib (re, logging, dataclasses).
+      # Install pytest only — no torch/chromadb/sentence-transformers needed.
+      - name: Install test runner
+        run: pip install pytest==7.4.4 pytest-cov>=4.1.0
 
       - name: Run safety + chunking unit tests
         run: pytest tests/test_safety.py tests/test_chunk_text.py -v --tb=short
 
-      # Retrieval and API tests need the Chroma DB (committed to git) and API keys.
-      # continue-on-error so rate limits don't block the PR.
-      - name: Run retrieval + API tests
+      # Integration tests need the full ML stack and live API keys.
+      # Run best-effort so missing keys / rate limits don't block PRs.
+      - name: Install full dependencies for integration tests
+        run: |
+          pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --no-cache-dir -r requirements.txt
+          pip install --no-cache-dir httpx>=0.27.0
+        continue-on-error: true
+
+      - name: Run retrieval + API integration tests
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
